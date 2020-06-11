@@ -20,7 +20,14 @@ class UsersController < ApplicationController
   def show
     @user = User.find(params[:id])
     redirect_to root_url and return unless @user.activated?
-    @microposts = @user.microposts.paginate(page: params[:page])
+    if params[:q] && params[:q].reject {|key,value| value.empty? }.present?
+      @q = @user.microposts.ransack(microposts_search_params)
+      @microposts = @q.result.paginate(page: params[:page])
+    else
+      @q = Micropost.none.ransack
+      @microposts = @user.microposts.paginate(page: params[:page])
+    end
+    @url = user_path(@user)
   end
   
   def new
