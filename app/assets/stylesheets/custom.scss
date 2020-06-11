@@ -286,3 +286,20 @@ span.picture {
     border: 0;
   }
 }
+
+// ransack
+
+.search_form {
+  overflow: auto;
+  margin: 10px;
+  float: right;
+  .input-group {
+    width: 300px;
+    .form-control {
+      width: 250px;
+    }
+    .btn {
+      width: 50px;
+    }
+  }
+}
