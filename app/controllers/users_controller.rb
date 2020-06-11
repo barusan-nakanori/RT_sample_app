@@ -9,10 +9,10 @@ class UsersController < ApplicationController
   def index
     if params[:q] && params[:q].reject{ |key,value| value.blank? }.present?
       @q = User.ransack(search_params, activated: true)
-      @title = "Seach Result"
+      @title = "Search Result"
     else
       @q = User.ransack(activate: true)
-      @title = "All User"
+      @title = "All Users"
     end
     @users = @q.result.paginate(page: params[:page])
   end
